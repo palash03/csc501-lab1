@@ -1,0 +1,44 @@
+1) What are the advantages and disadvantages of each of the two scheduling policies? Also, give the advantages and disadvantages of the round robin scheduling policy originally implemented in Xinu.
+
+Ans. Advantages of Random Scheduler:
+	a) Each process execution is randomized hence the starvation of any process is reduced greatly.
+	b) Processes having a higher priority have a higher probability of execution, hence the scheduling of higher priority processes is not affected significantly.
+	
+	Disadvantages of Random Scheduler:
+	a) Increased overhead due to increased context switching (it is an expensive operation).
+	b) If the sum of the processes becomes zero, we have to manually provide a random value as generating a random number gives an error, rand()%sum if sum = 0.
+	c) Higher priority processes may be preempted during execution by smaller priority processes which reduces the efficiency of the system.
+	
+	Advantages of Linux like Scheduler:
+	a) Process scheduled based on their goodness value, which prevents starvation of processes and is very efficient.
+	b) All available processes are given equal chance to execute in an epoch. 
+	
+	Disadvantages of Linux like Scheduler:
+	a) Adds an overhead because we are storing goodness as well as counter as process variables.
+	b) If the epoch has some unused ticks then the null process needs to be scheduled.
+	
+	Advantages of Round Robin Scheduler:
+	a) Scheduling is based on priority of each process which means more important processes run first hence, increased efficiency.
+	b) No starvation among processes of equal priority.
+	c) The number of context switching is reduced greatly in this implementation. 
+	
+	Disadvantages of Round Robin Scheduler: 
+	a) Starvation of processes is increased if the processes being scheduled have different priorities.
+
+
+2) Describe when each of the schedulers run the NULL process.
+
+Ans. 
+a) Random based scheduler runs the null process in the very beginning when the processes are initialized just before the main function starts execution. Furthermore, when all processes have been dequeued from the ready queue, then 	the null process is scheduled.
+
+b) Linux Like scheduler runs the null proces when all the runnable processes in an epoch have used up their quantum.
+
+c) Round robin scheduler runs the null process only at the end when all the processes of higher priorities have finished their execution.
+
+
+3) Assume that there are three processes P1, P2, P3 that will run forever without blocking. We want to allocate the following CPU times to each of them: 20% to P1, 30% to P2, and 50% to P3. Which priorities do we need to set to P1, P2, and P3 to accomplish this if we want to use the Random scheduler? Assume that those processes are the only ones running in the machine. Could you give a generalization of your result to n processes? Explain.
+
+Ans. Priorities set for the three processes can be : P1: 20, P2: 30, P3: 50. 
+If the n processes have priorities, P1,P2....,Pn which sum up to 100 then the priorities will be set as per the below equation,
+
+CPU_Percentage(i) = (Pi/(P1+P2+....+Pn))*100
