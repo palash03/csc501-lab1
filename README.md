@@ -1,6 +1,6 @@
 PA1 - Implemented two new scheduling policies, viz., Random Scheduler and Linux-like Scheduler in XINU OS to tackle starvation problem which is prevalent in traditional priority based scheduler policy in XINU.
 
-### 2) Random based Scheduler (based loosely on the Linux kernel 2.2)
+### 1) Random based Scheduler (based loosely on the Linux kernel 2.2)
 
 This scheduling algorithm is based on priority of processes.
 
